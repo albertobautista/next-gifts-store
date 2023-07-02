@@ -11,19 +11,28 @@ const mongoConnection = {
 };
 
 export const connect = async () => {
-  console.log("Conectando a MongoDB");
+  console.log("Conectando a MongoDB 1");
   if (mongoConnection.isConnected) {
     console.log("Ya estabamos conectados");
     return;
   }
 
   if (mongoose.connections.length > 0) {
+    console.log("Conectando a MongoDB 2", {
+      mongoose,
+      connections: mongoose.connections.length,
+      isConnected: mongoConnection.isConnected,
+      monggose: mongoose.connections[0].readyState,
+    });
+
     mongoConnection.isConnected = mongoose.connections[0].readyState;
+    console.log("Conectando a MongoDB 3");
 
     if (mongoConnection.isConnected === 1) {
       console.log("Usando conexión anterior");
       return;
     }
+    console.log("Conectando a MongoDB 4");
 
     await mongoose.disconnect();
   }
