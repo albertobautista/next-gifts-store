@@ -7,6 +7,7 @@ export const checkUserByEmailAndPassword = async (
   password: string
 ) => {
   console.log("checkUserByEmailAndPassword", { email, password });
+  console.log("checkUserByEmailAndPassword db", { db });
   db.connect();
   const user = await User.findOne({ email });
   console.log("checkUserByEmailAndPassword user 1", { user });
