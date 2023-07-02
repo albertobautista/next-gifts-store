@@ -66,6 +66,7 @@ interface Props {
 }
 
 const ProductAdminPage: FC<Props> = ({ product }) => {
+  console.log("PRODUCT", { product });
   const [newTagValue, setNewTagValue] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -194,7 +195,9 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
   return (
     <AdminLayout
       title={"Producto"}
-      subtitle={`Editando: ${product.title}`}
+      subtitle={`${
+        product.images.length > 0 ? "Editando: " + product.title : ""
+      }`}
       icon={<DriveFileRenameOutline />}
     >
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -319,7 +322,10 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
                 <FormControlLabel
                   key={size}
                   control={
-                    <Checkbox checked={getValues("sizes").includes(size)} />
+                    <Checkbox
+                      color="secondary"
+                      checked={getValues("sizes").includes(size)}
+                    />
                   }
                   label={size}
                   onChange={() => onChangeSize(size)}
@@ -453,7 +459,7 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   if (slug === "new") {
     const tempProduct = JSON.parse(JSON.stringify(new Product()));
     delete tempProduct._id;
-    tempProduct.images = ["img1.jpg", "img2.jpg"];
+    tempProduct.images = [];
     product = tempProduct;
   } else {
     product = await dbProducts.getProductBySlug(slug.toString());

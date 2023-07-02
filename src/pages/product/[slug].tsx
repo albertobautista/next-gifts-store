@@ -91,7 +91,7 @@ const ProductPage: NextPage<Props> = ({ product }) => {
                 {product.inStock > 0 ? (
                   <Button
                     onClick={onAddProduct}
-                    className="circular-btn"
+                    // className="bordered-btn"
                     color="secondary"
                     disabled={!tempCartProduct.size}
                   >

@@ -27,7 +27,7 @@ export const AdminLayout: FC<Props> = ({ children, title, subtitle, icon }) => {
       <SideMenu />
       <main
         style={{
-          margin: "80px auto",
+          margin: "100px auto",
           maxWidth: "1440px",
           padding: "0px 30px",
         }}

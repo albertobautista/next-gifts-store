@@ -73,7 +73,7 @@ const DashboardPage = () => {
         />
         <SummaryTitle
           title={lowInventory}
-          subtitle={"Bajo inventario"}
+          subtitle={"Inventario bajo"}
           icon={<CreditCardOutlined color="success" sx={{ fontSize: 50 }} />}
         />
         <SummaryTitle

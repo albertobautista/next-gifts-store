@@ -19,7 +19,7 @@ const EmptyPage = () => {
       >
         <RemoveShoppingCartOutlined sx={{ fontSize: 100 }} />
         <Box display="flex" flexDirection="column" alignItems="center">
-          <Typography>Su carrito esta vacio</Typography>
+          <Typography>Su carrito esta vacío</Typography>
           <NextLink href="/" passHref legacyBehavior>
             <Link typography="h4" color="secondary">
               Regresar

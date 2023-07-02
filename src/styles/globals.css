@@ -20,12 +20,15 @@
 }
 
 
-.circular-btn {
-  border-radius: 30px;
+.bordered-btn {
+  border-radius: 10px;
 }
 
-.circular-btn:hover {
-  background-color: #274494 !important;
+.position{
+  position: relative;
+}
+.bordered-btn:hover {
+  background-color: #454545 !important;
 }
 
 .strong-btn{

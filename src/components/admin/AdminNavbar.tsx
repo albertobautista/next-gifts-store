@@ -23,13 +23,15 @@ export const AdminNavbar = () => {
             <IconButton>
               <StorefrontOutlined color="primary" />
             </IconButton>
-            <Typography variant="h5">Shop</Typography>
+            <Typography variant="h5">Admin Store</Typography>
           </Link>
         </NextLink>
 
         <Box flex={1} />
 
-        <Button onClick={toggleSideMenu}>Menú</Button>
+        <Button size="large" onClick={toggleSideMenu}>
+          Menú
+        </Button>
       </Toolbar>
     </AppBar>
   );

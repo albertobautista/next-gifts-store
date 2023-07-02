@@ -25,6 +25,7 @@ export type TTypes =
   | "socks"
   | "shoes"
   | "accessories"
+  | "caps"
   | "other";
 export type TGender = "men" | "women" | "kids" | "unisex";
 

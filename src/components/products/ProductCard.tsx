@@ -50,7 +50,7 @@ export const ProductCard: FC<Props> = ({ product }) => {
           prefetch={false}
         >
           <Link> */}
-        <CardActionArea>
+        <Box sx={{ position: "relative" }}>
           {product.inStock === 0 && (
             <Chip
               color="secondary"
@@ -58,13 +58,13 @@ export const ProductCard: FC<Props> = ({ product }) => {
               sx={{
                 position: "absolute",
                 zIndex: 99,
-                top: "10px",
+                top: "20px",
                 left: "10px",
               }}
             />
           )}
           <ProductSlideshow images={product.images} />
-        </CardActionArea>
+        </Box>
         {/* <CardMedia
                 component={"img"}
                 image={productImage}
@@ -113,9 +113,9 @@ export const ProductCard: FC<Props> = ({ product }) => {
                 color="primary"
                 size="medium"
                 fullWidth
-                className="circular-btn"
+                className="bordered-btn"
               >
-                <Typography fontSize={15}>Ver más detalles</Typography>
+                <Typography fontSize={13}>VER MÁS</Typography>
               </Button>
             </Link>
           </NextLink>

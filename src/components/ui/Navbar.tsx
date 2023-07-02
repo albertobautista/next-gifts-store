@@ -43,7 +43,7 @@ export const Navbar = () => {
             <IconButton>
               <StorefrontOutlined color="primary" />
             </IconButton>
-            <Typography variant="h5">Shop</Typography>
+            <Typography variant="h5">Store</Typography>
           </Link>
         </NextLink>
         <Box
@@ -114,6 +114,7 @@ export const Navbar = () => {
           <IconButton
             onClick={() => setIsSearchVisible(true)}
             className="fadeIn"
+            color="primary"
             sx={{ display: { xs: "none", sm: "flex" } }}
           >
             <SearchOutlined />
@@ -129,14 +130,16 @@ export const Navbar = () => {
         </IconButton>
         <NextLink href="/cart" passHref legacyBehavior>
           <Link>
-            <IconButton>
+            <IconButton color="primary">
               <Badge badgeContent={itemsNumber} color="secondary">
                 <ShoppingCartOutlined />
               </Badge>
             </IconButton>
           </Link>
         </NextLink>
-        <Button onClick={toggleSideMenu}>Menú</Button>
+        <Button size="large" onClick={toggleSideMenu}>
+          Menú
+        </Button>
       </Toolbar>
     </AppBar>
   );

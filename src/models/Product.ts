@@ -27,6 +27,7 @@ const productSchema = new Schema(
           "pants",
           "hoodies",
           "hats",
+          "caps",
           "jerseys",
           "shorts",
           "socks",

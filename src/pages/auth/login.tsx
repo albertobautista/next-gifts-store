@@ -115,7 +115,7 @@ const LoginPage = () => {
               <Button
                 type="submit"
                 color="secondary"
-                className="circular-btn"
+                className="bordered-btn"
                 size="large"
                 fullWidth
               >

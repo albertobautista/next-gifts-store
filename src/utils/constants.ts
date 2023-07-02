@@ -17,9 +17,10 @@ export const PRODUCT_GENDER_OPTIONS: IOption[] = [
 ];
 
 export const MENU_OPTIONS: IMenuOption[] = [
-  { text: "Accesorios", value: "accessories" },
-  { text: "Gorras", value: "hats" },
+  { text: "Shorts", value: "shorts" },
+  { text: "Jerseys", value: "jerseys" },
+  { text: "Pants", value: "pants" },
   { text: "Sudaderas", value: "hoodies" },
   { text: "Camisas", value: "shirts" },
-  { text: "Jerseys", value: "jerseys" },
+  { text: "Gorras", value: "caps" },
 ];

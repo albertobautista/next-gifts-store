@@ -5,6 +5,7 @@ export const STORE_CONSTANTS = {
     "pants",
     "hoodies",
     "hats",
+    "caps",
     "jerseys",
     "shorts",
     "socks",
