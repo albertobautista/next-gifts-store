@@ -8,11 +8,11 @@ export const checkUserByEmailAndPassword = async (
 ) => {
   console.log("checkUserByEmailAndPassword", { email, password });
   console.log("checkUserByEmailAndPassword db", { db });
-  db.connect();
+  await db.connect();
   const user = await User.findOne({ email });
   console.log("checkUserByEmailAndPassword user 1", { user });
 
-  db.disconnect();
+  await db.disconnect();
 
   if (!user) return null;
 
