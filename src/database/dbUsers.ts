@@ -6,8 +6,11 @@ export const checkUserByEmailAndPassword = async (
   email: string,
   password: string
 ) => {
+  console.log("checkUserByEmailAndPassword", { email, password });
   db.connect();
   const user = await User.findOne({ email });
+  console.log("checkUserByEmailAndPassword user 1", { user });
+
   db.disconnect();
 
   if (!user) return null;
@@ -15,6 +18,7 @@ export const checkUserByEmailAndPassword = async (
   if (!bcrypt.compareSync(password, user.password!)) return null;
 
   const { role, name, _id } = user;
+  console.log("checkUserByEmailAndPassword user 2", { user });
 
   return {
     id: _id,
