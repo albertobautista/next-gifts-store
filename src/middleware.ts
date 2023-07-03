@@ -60,5 +60,6 @@ export const config = {
     "/api/orders/:path*",
     "/admin/:path*",
     "/api/admin/:path*",
+    "/profile",
   ],
 };

@@ -8,6 +8,7 @@ export const PRODUCT_TYPE_OPTIONS: IOption[] = [
   { keyword: "jerseys", value: "Jerseys" },
   { keyword: "shorts", value: "Shorts" },
   { keyword: "accessories", value: "Accesorios" },
+  { keyword: "caps", value: "Gorras" },
 ];
 export const PRODUCT_GENDER_OPTIONS: IOption[] = [
   { keyword: "men", value: "Caballeros" },

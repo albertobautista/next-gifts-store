@@ -8,7 +8,7 @@ interface Props {
   title: string;
   pageDescription: string;
   imageFullURL?: string;
-  pageTitle: string;
+  pageTitle?: string;
 }
 
 export const StoreLayout: FC<Props> = ({

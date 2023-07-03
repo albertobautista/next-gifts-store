@@ -43,6 +43,7 @@ const validTypes: TTypes[] = [
   "accessories",
   "jerseys",
   "shoes",
+  "caps",
 ];
 const validGender: TGender[] = ["men", "women", "kids", "unisex"];
 const validSizes: TSize[] = ["XS", "S", "M", "L", "XL", "XXL", "XXXL"];

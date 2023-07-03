@@ -28,7 +28,16 @@ const CART_INITIAL_STATE: CartState = {
   total: 0,
   tax: 0,
   itemsNumber: 0,
-  address: undefined,
+  address: {
+    firstName: "",
+    lastName: "",
+    address: "",
+    address2: "",
+    zip: "",
+    city: "",
+    country: "",
+    phone: "",
+  },
 };
 
 interface ContextProps {

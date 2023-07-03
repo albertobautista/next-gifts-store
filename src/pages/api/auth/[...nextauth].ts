@@ -53,7 +53,8 @@ export const authOptions: NextAuthOptions = {
           case "oauth":
             token.user = await dbUsers.oAuthToDbUser(
               user?.email || "",
-              user?.name || ""
+              user?.name || "",
+              user?.image || ""
             );
             break;
 

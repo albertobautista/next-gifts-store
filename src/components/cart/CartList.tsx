@@ -73,7 +73,7 @@ export const CartList: FC<Props> = ({ isEditable = false }) => {
                 ) : (
                   <Typography>
                     {product.quantity}
-                    {product.quantity > 1 ? "productos" : "producto"}
+                    {product.quantity > 1 ? " productos" : " producto"}
                   </Typography>
                 )}
               </Box>

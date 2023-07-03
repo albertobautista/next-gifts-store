@@ -73,11 +73,11 @@ const LoginPage = () => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Typography variant="h1" component="h1">
-                Iniciar sesion
+                Iniciar sesión
               </Typography>
               {showError && (
                 <Chip
-                  label="Error al iniciar sesion"
+                  label="Error al iniciar sesión"
                   color="error"
                   className="fadeIn"
                 />

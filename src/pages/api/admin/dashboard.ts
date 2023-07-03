@@ -8,6 +8,7 @@ type Data =
       paidOrders: number;
       notPaidOrders: number;
       numberOfClients: number;
+      numberOfAdmins: number;
       numberOfProducts: number;
       productsWithNoInventory: number;
       lowInventory: number;
@@ -41,11 +42,13 @@ async function getDashboardData(
 
   const [
     numberOfClients,
+    numberOfAdmins,
     numberOfProducts,
     productsWithNoInventory,
     lowInventory,
   ] = await Promise.all([
     User.find({ role: "client" }).count(),
+    User.find({ role: "admin" }).count(),
     Product.find({}).count(),
     Product.find({ inStock: 0 }).count(),
     Product.find({ inStock: { $lte: 10 } }).count(),
@@ -57,6 +60,7 @@ async function getDashboardData(
     paidOrders,
     notPaidOrders,
     numberOfClients,
+    numberOfAdmins,
     numberOfProducts,
     productsWithNoInventory,
     lowInventory,

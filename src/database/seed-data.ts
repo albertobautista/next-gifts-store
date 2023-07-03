@@ -34,6 +34,7 @@ interface SeedUser {
   email: string;
   password: string;
   role: "admin" | "client";
+  picture: string;
 }
 
 interface SeedData {
@@ -143,7 +144,7 @@ export const initialData: SeedData = {
       description:
         "El Pantalón adidas Run Icon es una perfecta elección para correr, sin embargo, es versátil y se adaptará de manera perfecta a cualquier otro entrenamiento que forme parte de tu rutina. Cuenta con la tecnología AEROREADY que tiene como objetivo eliminar la humedad de tu cuerpo en todo momento, el sudor ya no será un distractor.",
       images: ["pantsAdidas1.jpeg", "pantsAdidas2.jpeg"],
-      inStock: 3,
+      inStock: 0,
       price: 1799,
       sizes: ["L", "XL", "XXL"],
       slug: "pantalon_adidas_run_icon",
@@ -338,12 +339,16 @@ export const initialData: SeedData = {
       email: "alberto@gmail.com",
       password: bcrypt.hashSync("123456"),
       role: "admin",
+      picture:
+        "https://res.cloudinary.com/deykexyle/image/upload/v1688346692/emptyProfilePicture_rsj2gy.png",
     },
     {
       name: "Javier",
       email: "javier@gmail.com",
       password: bcrypt.hashSync("123456"),
       role: "client",
+      picture:
+        "https://res.cloudinary.com/deykexyle/image/upload/v1688346692/emptyProfilePicture_rsj2gy.png",
     },
   ],
 };

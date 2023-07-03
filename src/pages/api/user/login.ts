@@ -8,7 +8,10 @@ type Data =
   | {
       message: string;
     }
-  | { token: string; user: { email: string; role: string; name: string } };
+  | {
+      token: string;
+      user: { email: string; role: string; name: string; picture: string };
+    };
 
 export default function handler(
   req: NextApiRequest,
@@ -37,10 +40,10 @@ async function loginUser(req: NextApiRequest, res: NextApiResponse<Data>) {
   if (!bcrytp.compareSync(password, user.password!)) {
     return res.status(400).json({ message: "Correo o contraseña no validos" });
   }
-  const { role, name, _id } = user;
+  const { role, name, _id, picture } = user;
 
   return res.status(200).json({
     token: jwt.signToken(_id, email),
-    user: { email, role, name },
+    user: { email, role, name, picture },
   });
 }

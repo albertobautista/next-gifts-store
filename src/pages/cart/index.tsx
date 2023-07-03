@@ -26,7 +26,7 @@ const CartPage = () => {
   if (!isLoaded || cart.length === 0) return <></>;
   return (
     <StoreLayout
-      title={"Carrito - 3"}
+      title={"Mi carrito"}
       pageDescription={"Carrito de compras"}
       pageTitle="Mi Carrito"
     >
@@ -41,7 +41,7 @@ const CartPage = () => {
               <Divider sx={{ my: 1 }} />
               <OrderSummary />
               <Box sx={{ mt: 3 }}>
-                <Button href="/checkout/address" color="secondary" fullWidth>
+                <Button href="/checkout/summary" color="secondary" fullWidth>
                   Checkout
                 </Button>
               </Box>

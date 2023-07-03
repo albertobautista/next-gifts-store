@@ -55,6 +55,8 @@ async function registerUser(req: NextApiRequest, res: NextApiResponse<Data>) {
     email: email.toLowerCase(),
     password: bcrytp.hashSync(password),
     role: "client",
+    picture:
+      "https://res.cloudinary.com/deykexyle/image/upload/v1688346692/emptyProfilePicture_rsj2gy.png",
   });
 
   try {

@@ -1,5 +1,14 @@
-import { CreditCardOutlined, DashboardOutlined } from "@mui/icons-material";
+import {
+  CardGiftcardOutlined,
+  CategoryOutlined,
+  CheckBoxOutlineBlankOutlined,
+  CreditCardOutlined,
+  DashboardOutlined,
+  InfoOutlined,
+  PeopleAltOutlined,
+} from "@mui/icons-material";
 import { CardContent, Grid, Typography, Card } from "@mui/material";
+import { GridViewColumnIcon } from "@mui/x-data-grid";
 import { SummaryTitle } from "gifts-store/components/admin";
 import { AdminLayout } from "gifts-store/components/layouts";
 import { IDashboardSummary } from "gifts-store/interfaces";
@@ -10,17 +19,6 @@ const DashboardPage = () => {
   const { data, error } = useSWR<IDashboardSummary>("/api/admin/dashboard", {
     refreshInterval: 30 * 1000,
   });
-  const [refreshIn, setRefreshIn] = useState(30);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setRefreshIn((prev) => (prev > 0 ? prev - 1 : 30));
-    }, 1000);
-
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
 
   if (!error && !data) return <div>Cargando...</div>;
   if (error) return <Typography>Ha ocurrido un error</Typography>;
@@ -30,6 +28,7 @@ const DashboardPage = () => {
     paidOrders,
     notPaidOrders,
     numberOfClients,
+    numberOfAdmins,
     numberOfProducts,
     productsWithNoInventory,
     lowInventory,
@@ -37,49 +36,41 @@ const DashboardPage = () => {
   return (
     <AdminLayout
       title="Dashboard"
-      subtitle="Estadisticas generales"
+      subtitle="Estadísticas generales"
       icon={<DashboardOutlined />}
     >
       <Grid container spacing={2}>
         <SummaryTitle
           title={numberOfOrders}
           subtitle={"Ordenes totales"}
-          icon={<CreditCardOutlined color="secondary" sx={{ fontSize: 50 }} />}
-        />
-        <SummaryTitle
-          title={paidOrders}
-          subtitle={"Ordenes pagadas"}
-          icon={<CreditCardOutlined color="warning" sx={{ fontSize: 50 }} />}
-        />
-        <SummaryTitle
-          title={notPaidOrders}
-          subtitle={"Ordenes pendientes"}
-          icon={<CreditCardOutlined color="secondary" sx={{ fontSize: 50 }} />}
+          icon={<GridViewColumnIcon color="warning" sx={{ fontSize: 50 }} />}
         />
         <SummaryTitle
           title={numberOfClients}
           subtitle={"Clientes"}
-          icon={<CreditCardOutlined color="secondary" sx={{ fontSize: 50 }} />}
+          icon={<PeopleAltOutlined color="primary" sx={{ fontSize: 50 }} />}
+        />
+        <SummaryTitle
+          title={numberOfAdmins}
+          subtitle={"Administradores"}
+          icon={<PeopleAltOutlined color="primary" sx={{ fontSize: 50 }} />}
         />
         <SummaryTitle
           title={numberOfProducts}
           subtitle={"Productos"}
-          icon={<CreditCardOutlined color="error" sx={{ fontSize: 50 }} />}
+          icon={<CategoryOutlined color="success" sx={{ fontSize: 50 }} />}
         />
         <SummaryTitle
           title={productsWithNoInventory}
           subtitle={"Sin existencias"}
-          icon={<CreditCardOutlined color="success" sx={{ fontSize: 50 }} />}
+          icon={
+            <CheckBoxOutlineBlankOutlined color="error" sx={{ fontSize: 50 }} />
+          }
         />
         <SummaryTitle
           title={lowInventory}
           subtitle={"Inventario bajo"}
-          icon={<CreditCardOutlined color="success" sx={{ fontSize: 50 }} />}
-        />
-        <SummaryTitle
-          title={refreshIn}
-          subtitle={"Actualizado en "}
-          icon={<CreditCardOutlined color="success" sx={{ fontSize: 50 }} />}
+          icon={<InfoOutlined color="secondary" sx={{ fontSize: 50 }} />}
         />
       </Grid>
     </AdminLayout>
