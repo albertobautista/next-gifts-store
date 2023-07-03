@@ -19,6 +19,7 @@ const columns: GridColDef[] = [
             component="img"
             alt={row.title}
             className="fadeIn"
+            sx={{ padding: 2 }}
             image={row.img}
           />
         </a>

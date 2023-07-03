@@ -12,7 +12,9 @@ export const AuthLayout: FC<Props> = ({ title, children }) => {
       <Head>
         <title>{title}</title>
       </Head>
-      <main>
+      <main
+        style={{ backgroundColor: "rgba(255, 255, 255, 1)", height: "100vh" }}
+      >
         <Box
           display="flex"
           justifyContent="center"

@@ -68,10 +68,19 @@ const RegisterPage = () => {
   return (
     <AuthLayout title={"Crear cuenta"}>
       <form onSubmit={handleSubmit(onRegister)} noValidate>
-        <Box sx={{ width: 350, padding: "10px 20px" }}>
+        <Box
+          sx={{
+            width: 350,
+            padding: "10px 20px",
+            backgroundColor: "rgba(255, 255, 255, 1)",
+            backdropFilter: "blur(8px)",
+            borderRadius: 2,
+            boxShadow: 10,
+          }}
+        >
           <Grid container spacing={2}>
             <Grid item xs={12}>
-              <Typography variant="h1" component="h1">
+              <Typography variant="h1" component="h1" textAlign="center">
                 Crear cuenta
               </Typography>
               {showError && (
@@ -119,13 +128,7 @@ const RegisterPage = () => {
               />
             </Grid>
             <Grid item xs={12}>
-              <Button
-                type="submit"
-                color="secondary"
-                className="bordered-btn"
-                size="large"
-                fullWidth
-              >
+              <Button type="submit" color="secondary" size="large" fullWidth>
                 Registrarse
               </Button>
             </Grid>
