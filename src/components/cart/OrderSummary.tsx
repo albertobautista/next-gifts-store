@@ -1,10 +1,22 @@
 import { Grid, Typography } from "@mui/material";
 import { CartContext } from "gifts-store/context";
+import { IOrderItem } from "gifts-store/interfaces";
 import { formatCurrency } from "gifts-store/utils";
-import React, { useContext } from "react";
+import React, { FC, useContext } from "react";
 
-export const OrderSummary = () => {
+interface Props {
+  orderValues?: {
+    itemsNumber: number;
+    subTotal: number;
+    total: number;
+    tax: number;
+  };
+}
+export const OrderSummary: FC<Props> = ({ orderValues }) => {
   const { itemsNumber, subTotal, total, tax } = useContext(CartContext);
+  const valuesToShow = orderValues
+    ? orderValues
+    : { itemsNumber, subTotal, total, tax };
   return (
     <Grid container>
       <Grid item xs={6}>
@@ -12,26 +24,29 @@ export const OrderSummary = () => {
       </Grid>
       <Grid item xs={6} display="flex" justifyContent="end">
         <Typography>
-          {itemsNumber} {itemsNumber > 1 ? "items" : "item"}
+          {valuesToShow.itemsNumber}{" "}
+          {valuesToShow.itemsNumber > 1 ? "items" : "item"}
         </Typography>
       </Grid>
       <Grid item xs={6}>
         <Typography>Subtotal</Typography>
       </Grid>
       <Grid item xs={6} display="flex" justifyContent="end">
-        <Typography>{formatCurrency(subTotal)}</Typography>
+        <Typography>{formatCurrency(valuesToShow.subTotal)}</Typography>
       </Grid>
       <Grid item xs={6}>
         <Typography>Impuestos (15%)</Typography>
       </Grid>
       <Grid item xs={6} display="flex" justifyContent="end">
-        <Typography>{formatCurrency(tax)}</Typography>
+        <Typography>{formatCurrency(valuesToShow.tax)}</Typography>
       </Grid>
       <Grid item xs={6} sx={{ mt: 2 }}>
         <Typography variant="subtitle1">Total</Typography>
       </Grid>
       <Grid item xs={6} display="flex" justifyContent="end" sx={{ mt: 2 }}>
-        <Typography variant="subtitle1">{formatCurrency(total)}</Typography>
+        <Typography variant="subtitle1">
+          {formatCurrency(valuesToShow.total)}
+        </Typography>
       </Grid>
     </Grid>
   );

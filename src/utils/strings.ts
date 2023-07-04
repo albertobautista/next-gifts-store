@@ -9,7 +9,6 @@ export const truncateText = (text: string, length: number): string => {
 };
 
 export const processText = (text: string = "", options: IOption[]): string => {
-  console.log("processText", text);
   const selectedOption = options.find(
     (option) => text.toLowerCase() === option.keyword.toLowerCase()
   );

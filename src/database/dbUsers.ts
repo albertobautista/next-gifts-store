@@ -6,11 +6,8 @@ export const checkUserByEmailAndPassword = async (
   email: string,
   password: string
 ) => {
-  console.log("checkUserByEmailAndPassword", { email, password });
-  console.log("checkUserByEmailAndPassword db", { db });
   await db.connect();
   const user = await User.findOne({ email });
-  console.log("checkUserByEmailAndPassword user 1", { user });
 
   await db.disconnect();
 
@@ -19,7 +16,6 @@ export const checkUserByEmailAndPassword = async (
   if (!bcrypt.compareSync(password, user.password!)) return null;
 
   const { role, name, _id, picture } = user;
-  console.log("checkUserByEmailAndPassword user 2", { user });
 
   return {
     id: _id,
@@ -30,7 +26,6 @@ export const checkUserByEmailAndPassword = async (
   };
 };
 
-// Esta función crea o verifica el usuario de OAuth
 export const oAuthToDbUser = async (
   oAuthEmail: string,
   oAuthName: string,
@@ -52,7 +47,6 @@ export const oAuthToDbUser = async (
     role: "client",
     picture: oAuthPicture,
   });
-  console.log("oAuthToDbUser newUser", { newUser });
 
   await newUser.save();
   await db.disconnect();

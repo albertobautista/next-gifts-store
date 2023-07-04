@@ -15,7 +15,6 @@ import { useContext } from "react";
 
 export default function ProfilePage() {
   const { user } = useContext(AuthContext);
-  console.log("user", user);
   if (!user) return <></>;
 
   return (

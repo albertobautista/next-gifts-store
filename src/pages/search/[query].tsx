@@ -1,7 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { StoreLayout } from "gifts-store/components/layouts";
 import { ProductList } from "gifts-store/components/products";
-import { FullScreenLoading } from "gifts-store/components/ui";
 import { dbProducts } from "gifts-store/database";
 import { IProduct } from "gifts-store/interfaces";
 import { GetServerSideProps, NextPage } from "next";
@@ -57,8 +56,6 @@ export const getServerSideProps: GetServerSideProps = async ({ params }) => {
 
   let products = await dbProducts.getProductsByTerm(query);
   const foundProducts = products.length > 0;
-
-  // TODO: retornnar otros prroductos si no hay resultados con el termino de busqueda
 
   if (!foundProducts) {
     products = await dbProducts.getAllProducts();

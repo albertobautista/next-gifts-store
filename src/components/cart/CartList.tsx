@@ -17,13 +17,14 @@ import { FC, useContext } from "react";
 import { formatCurrency } from "gifts-store/utils";
 import { DeleteForeverOutlined } from "@mui/icons-material";
 import { CartContext } from "gifts-store/context";
-import { ICartProduct } from "gifts-store/interfaces";
+import { ICartProduct, IOrderItem } from "gifts-store/interfaces";
 
 interface Props {
   isEditable?: boolean;
+  products?: IOrderItem[];
 }
 
-export const CartList: FC<Props> = ({ isEditable = false }) => {
+export const CartList: FC<Props> = ({ isEditable = false, products }) => {
   const { cart, updateProductCarQuantity, removeProductCart } =
     useContext(CartContext);
 
@@ -34,9 +35,11 @@ export const CartList: FC<Props> = ({ isEditable = false }) => {
     product.quantity = newQuantity;
     updateProductCarQuantity(product);
   };
+
+  const productsToShow = products ? products : cart;
   return (
     <>
-      {cart.map((product) => (
+      {productsToShow.map((product) => (
         <div key={product.slug + product.size}>
           <Grid container spacing={2} sx={{ mb: 1 }}>
             <Grid item xs={3}>
@@ -67,7 +70,7 @@ export const CartList: FC<Props> = ({ isEditable = false }) => {
                     currentValue={product.quantity}
                     maxValue={10}
                     updateQuantity={(value) =>
-                      onNewProductCartQuantity(product, value)
+                      onNewProductCartQuantity(product as ICartProduct, value)
                     }
                   />
                 ) : (
@@ -90,7 +93,9 @@ export const CartList: FC<Props> = ({ isEditable = false }) => {
               </Typography>
               {isEditable && (
                 <Tooltip title="Eliminar del carrito">
-                  <IconButton onClick={() => removeProductCart(product)}>
+                  <IconButton
+                    onClick={() => removeProductCart(product as ICartProduct)}
+                  >
                     <DeleteForeverOutlined color="error" />
                     <Typography color="error">Eliminar</Typography>
                   </IconButton>

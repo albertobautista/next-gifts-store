@@ -1,7 +1,9 @@
 import { FC, useEffect, useReducer } from "react";
 import { CartContext, cartReducer } from "./";
-import { ICartProduct } from "gifts-store/interfaces";
+import { ICartProduct, IOrder } from "gifts-store/interfaces";
 import Cookies from "js-cookie";
+import { api } from "gifts-store/api";
+import axios from "axios";
 export interface CartState {
   isLoaded: boolean;
   cart: ICartProduct[];
@@ -48,9 +50,7 @@ export const CartProvider = ({ children }: ContextProps) => {
   const [state, dispatch] = useReducer(cartReducer, CART_INITIAL_STATE);
 
   const addToCart = (product: ICartProduct) => {
-    console.log("PRODUCTS", product);
     const isProductInCart = state.cart.some((item) => item._id === product._id);
-    console.log("PRODUCTS isProductInCart", isProductInCart);
 
     if (!isProductInCart)
       return dispatch({
@@ -60,10 +60,6 @@ export const CartProvider = ({ children }: ContextProps) => {
 
     const isProductInCartButDifferentSize = state.cart.some(
       (item) => item._id === product._id && item.size === product.size
-    );
-    console.log(
-      "PRODUCTS isProductInCartButDifferentSize",
-      isProductInCartButDifferentSize
     );
 
     if (!isProductInCartButDifferentSize)
@@ -79,7 +75,6 @@ export const CartProvider = ({ children }: ContextProps) => {
       item.quantity += product.quantity;
       return item;
     });
-    console.log("PRODUCTS updatedProducts", updatedProducts);
 
     dispatch({
       type: "[Cart] - Update products in cart",
@@ -112,10 +107,46 @@ export const CartProvider = ({ children }: ContextProps) => {
     dispatch({ type: "[Cart] - Update Address", payload: address });
   };
 
+  const createOrder = async (): Promise<{
+    hasError: boolean;
+    message: string;
+  }> => {
+    const order: IOrder = {
+      orderItems: state.cart.map((item) => ({
+        ...item,
+        size: item.size!,
+      })),
+      numberOfItems: state.itemsNumber,
+      subTotal: state.subTotal,
+      tax: state.tax,
+      total: state.total,
+      isPaid: false,
+    };
+    try {
+      const { data } = await api.post("/orders", order);
+      dispatch({ type: "[Cart] - Order created" });
+
+      return {
+        hasError: false,
+        message: data._id!,
+      };
+    } catch (error) {
+      if (axios.isAxiosError(error)) {
+        return {
+          hasError: true,
+          message: error.response?.data.message,
+        };
+      }
+      return {
+        hasError: true,
+        message: "Error al crear la orden",
+      };
+    }
+  };
+
   useEffect(() => {
     try {
       const cart = Cookies.get("cart") ? JSON.parse(Cookies.get("cart")!) : [];
-      console.log("PRODUCTS cart", cart);
       dispatch({
         type: "[Cart] - Load cart from cookies | storage",
         payload: cart,
@@ -178,6 +209,7 @@ export const CartProvider = ({ children }: ContextProps) => {
         updateProductCarQuantity,
         removeProductCart,
         updateAddress,
+        createOrder,
       }}
     >
       {children}

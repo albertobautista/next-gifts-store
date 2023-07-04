@@ -10,7 +10,6 @@ const CategoryPage = () => {
   const router = useRouter();
   const { categoryName } = router.query;
   const { products, isLoading } = useProducts(`/products?type=${categoryName}`);
-  console.log("PRODUCTS", products);
 
   return (
     <StoreLayout

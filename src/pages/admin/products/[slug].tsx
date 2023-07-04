@@ -67,7 +67,6 @@ interface Props {
 }
 
 const ProductAdminPage: FC<Props> = ({ product }) => {
-  console.log("PRODUCT", { product });
   const [newTagValue, setNewTagValue] = useState("");
   const [isSaving, setIsSaving] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -117,7 +116,6 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
   };
 
   const onFilesSelected = async (event: ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.files);
     if (!event.target.files || event.target.files?.length === 0) return;
     try {
       for (const file of event.target.files) {
@@ -127,18 +125,14 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
           "/admin/upload",
           formData
         );
-        console.log({ data });
         setValue("images", [...getValues("images"), data.message], {
           shouldValidate: true,
         });
       }
-    } catch (error) {
-      console.log("ERROR", error);
-    }
+    } catch (error) {}
   };
 
   const onSubmit = async (form: FormData) => {
-    console.log(form);
     if (form.images.length < 2) {
       return alert("Minimo son 2 imagenes");
     }
@@ -149,7 +143,6 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
         method: form._id ? "PUT" : "POST",
         data: form,
       });
-      console.log({ resp });
       if (!form._id) {
         router.replace(`/admin/products/${form.slug}`);
         alert("Producto creado correctamente");
@@ -157,7 +150,6 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
         setIsSaving(false);
       }
     } catch (error) {
-      console.log({ error });
       setIsSaving(false);
     }
   };
@@ -173,7 +165,6 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
 
   useEffect(() => {
     const suscription = watch((value, { name, type }) => {
-      console.log({ value, name, type });
       if (name === "title") {
         const newSlug =
           value
@@ -449,9 +440,6 @@ const ProductAdminPage: FC<Props> = ({ product }) => {
     </AdminLayout>
   );
 };
-
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const { slug = "" } = query;

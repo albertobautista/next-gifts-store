@@ -23,7 +23,9 @@ const DashboardPage = () => {
       refreshInterval: 30 * 1000,
     }
   );
-
+  if (!error && !data) {
+    return <></>;
+  }
   if (error) return <Typography>Ha ocurrido un error</Typography>;
 
   const {
@@ -36,6 +38,7 @@ const DashboardPage = () => {
     productsWithNoInventory,
     lowInventory,
   } = data!;
+
   return (
     <AdminLayout
       title="Dashboard"

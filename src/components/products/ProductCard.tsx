@@ -25,31 +25,9 @@ interface Props {
 }
 
 export const ProductCard: FC<Props> = ({ product }) => {
-  const [isHovered, setIsHovered] = useState<boolean>(false);
-  console.log("product", product);
-  // const productImage = useMemo(() => {
-  //   return isHovered
-  //     ? `products/${product.images[1]}`
-  //     : `products/${product.images[0]}`;
-  // }, [isHovered, product.images]);
-
   return (
-    <Grid
-      xs={12}
-      sm={6}
-      md={4}
-      item
-      // onMouseEnter={() => setIsHovered(true)}
-      // onMouseLeave={() => setIsHovered(false)}
-    >
+    <Grid xs={12} sm={6} md={4} item>
       <Card>
-        {/* <NextLink
-          href={"product/slug"}
-          passHref
-          legacyBehavior
-          prefetch={false}
-        >
-          <Link> */}
         <Box sx={{ position: "relative" }}>
           {product.inStock === 0 && (
             <Chip
@@ -65,15 +43,6 @@ export const ProductCard: FC<Props> = ({ product }) => {
           )}
           <ProductSlideshow images={product.images} />
         </Box>
-        {/* <CardMedia
-                component={"img"}
-                image={productImage}
-                alt={product.title}
-                className="fadeIn"
-              /> */}
-        {/* </CardActionArea> */}
-        {/* </Link>
-        </NextLink> */}
 
         <Box
           sx={{ mt: 1, p: 2 }}

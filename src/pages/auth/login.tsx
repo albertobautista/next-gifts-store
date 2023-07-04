@@ -12,7 +12,6 @@ import {
 import { AuthLayout } from "gifts-store/components/layouts";
 import { useForm } from "react-hook-form";
 import { isEmail } from "gifts-store/utils";
-// import { api } from "gifts-store/api";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "gifts-store/context";
 import { useRouter } from "next/router";
@@ -38,26 +37,6 @@ const LoginPage = () => {
   const onLogin = async ({ email, password }: TFormData) => {
     setShowError(false);
     signIn("credentials", { email, password });
-    // // const isValidLogin = await login(email, password);
-    // // if (!isValidLogin) {
-    // //   setShowError(true);
-    // //   setTimeout(() => {
-    // //     setShowError(false);
-    // //   }, 3000);
-    // //   return;
-    // // }
-    // // const destination = router.query?.p?.toString() || "/";
-    // // router.replace(destination);
-    // try {
-    //   const { data } = await api.post("/user/login", { email, password });
-    //   console.log(data);
-    //   const { token, user } = data;
-    // } catch (error) {
-    //   setShowError(true);
-    //   setTimeout(() => {
-    //     setShowError(false);
-    //   }, 3000);
-    // }
   };
 
   useEffect(() => {
@@ -169,9 +148,6 @@ const LoginPage = () => {
     </AuthLayout>
   );
 };
-
-// You should use getServerSideProps when:
-// - Only if you need to pre-render a page whose data must be fetched at request time
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,

@@ -1,5 +1,6 @@
 import { db } from "gifts-store/database";
 import { Product, User } from "gifts-store/models";
+import Order from "gifts-store/models/Order";
 import type { NextApiRequest, NextApiResponse } from "next";
 
 type Data =
@@ -32,21 +33,17 @@ async function getDashboardData(
   res: NextApiResponse<Data>
 ) {
   await db.connect();
-  const numberOfOrders = 14;
-  const paidOrders = 10;
-  const notPaidOrders = numberOfOrders - paidOrders;
-  //   const numberOfClients = await User.find({ role: "client" }).count();
-  //   const numberOfProducts = await Product.find({}).count();
-  //   const productsWithNoInventory = await Product.find({ inStock: 0 }).count();
-  //   const lowInventory = await Product.find({ inStock: { $lte: 10 } }).count();
-
   const [
+    numberOfOrders,
+    paidOrders,
     numberOfClients,
     numberOfAdmins,
     numberOfProducts,
     productsWithNoInventory,
     lowInventory,
   ] = await Promise.all([
+    Order.count(),
+    Order.find({ isPaid: true }).count(),
     User.find({ role: "client" }).count(),
     User.find({ role: "admin" }).count(),
     Product.find({}).count(),
@@ -58,11 +55,11 @@ async function getDashboardData(
   return res.status(200).json({
     numberOfOrders,
     paidOrders,
-    notPaidOrders,
     numberOfClients,
     numberOfAdmins,
     numberOfProducts,
     productsWithNoInventory,
     lowInventory,
+    notPaidOrders: numberOfOrders - paidOrders,
   });
 }

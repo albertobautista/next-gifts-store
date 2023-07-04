@@ -32,7 +32,6 @@ const AdminUsersPage = () => {
       await api.put("/admin/users", { userId, role: newRole });
     } catch (error) {
       setUsers(previosUsers);
-      console.log(error);
       alert("No se pudo actualizar el role del usuario");
     }
   };

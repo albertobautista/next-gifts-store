@@ -17,6 +17,9 @@ import { NextPage } from "next";
 import { GetServerSideProps } from "next";
 import { dbProducts } from "gifts-store/database";
 import { GetStaticProps } from "next";
+import { GetStaticPaths } from "next";
+import { useRouter } from "next/router";
+import { CartContext } from "gifts-store/context";
 
 interface Props {
   product: IProduct;
@@ -91,7 +94,6 @@ const ProductPage: NextPage<Props> = ({ product }) => {
                 {product.inStock > 0 ? (
                   <Button
                     onClick={onAddProduct}
-                    // className="bordered-btn"
                     color="secondary"
                     disabled={!tempCartProduct.size}
                   >
@@ -139,28 +141,6 @@ const ProductPage: NextPage<Props> = ({ product }) => {
   );
 };
 
-// export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-//   const { slug } = params as { slug: string };
-//   const product = await dbProducts.getProductBySlug(slug); // your fetch function here
-
-//   if (!product) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
-//   return {
-//     props: { product },
-//   };
-// };
-
-// You should use getStaticPaths if you’re statically pre-rendering pages that use dynamic routes
-import { GetStaticPaths } from "next";
-import { useRouter } from "next/router";
-import { CartContext } from "gifts-store/context";
-
 export const getStaticPaths: GetStaticPaths = async (ctx) => {
   const productsSlugs = await dbProducts.getAllProductsSlugs();
 
@@ -169,12 +149,6 @@ export const getStaticPaths: GetStaticPaths = async (ctx) => {
     fallback: "blocking",
   };
 };
-
-// You should use getStaticProps when:
-//- The data required to render the page is available at build time ahead of a user’s request.
-//- The data comes from a headless CMS.
-//- The data can be publicly cached (not user-specific).
-//- The page must be pre-rendered (for SEO) and be very fast — getStaticProps generates HTML and JSON files, both of which can be cached by a CDN for performance.
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const { slug = "" } = params as { slug: string };
@@ -191,7 +165,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { product },
-    revalidate: 60 * 60 * 24, // 24 hours
+    revalidate: 60 * 60 * 24,
   };
 };
 

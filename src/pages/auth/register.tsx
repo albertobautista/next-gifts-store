@@ -47,22 +47,6 @@ const RegisterPage = () => {
       return;
     }
     await signIn("credentials", { email, password });
-    // const destination = router.query?.p?.toString() || "/";
-    // router.replace(destination);
-    // try {
-    //   const { data } = await api.post("/user/register", {
-    //     email,
-    //     password,
-    //     name,
-    //   });
-    //   console.log(data);
-    //   const { token, user } = data;
-    // } catch (error) {
-    //   setShowError(true);
-    //   setTimeout(() => {
-    //     setShowError(false);
-    //   }, 3000);
-    // }
   };
 
   return (

@@ -5,7 +5,6 @@ import Credentials from "next-auth/providers/credentials";
 
 import GithubProvider from "next-auth/providers/github";
 export const authOptions: NextAuthOptions = {
-  // Configure one or more authentication providers
   providers: [
     Credentials({
       name: "Credentials",
@@ -18,7 +17,6 @@ export const authOptions: NextAuthOptions = {
         },
       },
       async authorize(credentials) {
-        console.log("credentials", credentials);
         return await dbUsers.checkUserByEmailAndPassword(
           credentials!.email,
           credentials!.password
@@ -29,23 +27,19 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GITHUB_ID!,
       clientSecret: process.env.GITHUB_SECRET!,
     }),
-    // ...add more providers here
   ],
   secret: process.env.NEXTAUTH_SECRET,
-  //   Custom Pages
   pages: {
     signIn: "/auth/login",
     newUser: "/auth/register",
   },
   session: {
-    maxAge: 2592000, /// 30d
+    maxAge: 2592000,
     strategy: "jwt",
-    updateAge: 86400, // cada día
+    updateAge: 86400,
   },
   callbacks: {
     async jwt({ token, account, user }) {
-      console.log("callbacks jwt", { token, account, user });
-
       if (account) {
         token.accessToken = account.access_token;
 
@@ -67,8 +61,6 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token, user }) {
-      // console.log({ session, token, user });
-
       session.accessToken = token.accessToken as any;
       session.user = token.user as any;
 

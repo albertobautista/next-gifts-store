@@ -21,7 +21,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [state, dispatch] = useReducer(authReducer, AUTH_INITIAL_STATE);
   const router = useRouter();
   const { data: session, status } = useSession();
-  console.log("Session", session, status);
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
@@ -37,7 +36,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const logout = () => {
-    // Cookies.remove("token");
     Cookies.remove("cart");
     Cookies.remove("firstName");
     Cookies.remove("lastName");
@@ -48,7 +46,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     Cookies.remove("country");
     Cookies.remove("phone");
     signOut();
-    // router.reload();
   };
 
   const register = async (
@@ -94,13 +91,8 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
-  // useEffect(() => {
-  //   checkToken();
-  // }, []);
-
   useEffect(() => {
     if (status === "authenticated") {
-      console.log("Session", session?.user);
       dispatch({ type: "[Auth] - Login", payload: session?.user as IUser });
     }
   }, [status, session]);

@@ -13,6 +13,7 @@ type CartActionType =
   | { type: "[Cart] - Update Address"; payload: IAddress }
   | { type: "[Cart] - Update products in cart"; payload: ICartProduct[] }
   | { type: "[Cart] - Change product cart quantity"; payload: ICartProduct }
+  | { type: "[Cart] - Order created" }
   | { type: "[Cart] - Remove product in cart"; payload: ICartProduct }
   | {
       type: "[Cart] - Update Order Summary";
@@ -45,13 +46,7 @@ export const cartReducer = (
     case "[Cart] - Remove product in cart":
       return {
         ...state,
-        // cart: state.cart.filter(
-        //   (item) =>
-        //     !(
-        //       item._id === action.payload._id &&
-        //       item.size === action.payload.size
-        //     )
-        // ),
+
         cart: state.cart.filter((item) => {
           if (
             item._id === action.payload._id &&
@@ -74,6 +69,16 @@ export const cartReducer = (
         ...state,
         address: action.payload,
       };
+    case "[Cart] - Order created":
+      return {
+        ...state,
+        cart: [],
+        itemsNumber: 0,
+        subTotal: 0,
+        tax: 0,
+        total: 0,
+      };
+
     default:
       return state;
   }

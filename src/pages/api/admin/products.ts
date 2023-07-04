@@ -59,8 +59,6 @@ async function updateProduct(req: NextApiRequest, res: NextApiResponse<Data>) {
       .json({ message: "Es necesario al menos 2 imagenes" });
   }
 
-  // TODO: posiblemente tendremos un localhost:3000/products/1234.jpg
-
   try {
     await db.connect();
     const product = await Product.findById(_id);
@@ -70,14 +68,11 @@ async function updateProduct(req: NextApiRequest, res: NextApiResponse<Data>) {
       return res.status(404).json({ message: "Product not found" + _id });
     }
 
-    //TODO Eliminar fotos en Cloudinary
     product.images.forEach(async (image) => {
-      console.log("IMAGES", { image });
       if (!images.includes(image)) {
         const [fileId, extension] = image
           .substring(image.lastIndexOf("/") + 1)
           .split(".");
-        console.log("BORRAR", { image, fileId, extension });
         await cloudinary.uploader.destroy(fileId);
       }
     });
@@ -97,7 +92,6 @@ async function createProduct(req: NextApiRequest, res: NextApiResponse<Data>) {
       .status(400)
       .json({ message: "El producto necesito al menos 2 imagenes" });
   }
-  // TODO: posiblemente tendremos un localhost:3000/products/1234.jpg
 
   try {
     await db.connect();

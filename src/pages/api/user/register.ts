@@ -65,7 +65,6 @@ async function registerUser(req: NextApiRequest, res: NextApiResponse<Data>) {
     });
     await db.disconnect();
   } catch (error) {
-    console.log(error);
     return res.status(500).json({ message: "Error en servidor" });
   }
   const { _id, role } = newUser;

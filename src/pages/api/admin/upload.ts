@@ -25,10 +25,6 @@ export default function handler(
   }
 }
 async function saveFile(file: formidable.File[]) {
-  //   const data = fs.readFileSync(file[0].filepath);
-  //   fs.writeFileSync(`./public/${file[0].originalFilename}`, data);
-  //   fs.unlinkSync(file[0].filepath);
-  //   return;
   const { secure_url } = await cloudinary.uploader.upload(file[0].filepath);
   return secure_url;
 }
@@ -40,15 +36,11 @@ async function parseFiles(req: NextApiRequest): Promise<string> {
       if (err) return reject(err);
       const filePath = await saveFile(files.file as formidable.File[]);
       resolve(filePath);
-      //   req.body = fields;
-      //   req.files = files;
-      //   resolve(null);
     });
   });
 }
 
 async function uploadFile(req: NextApiRequest, res: NextApiResponse<Data>) {
-  //   console.log("REQ", req);
   const imageUrl = await parseFiles(req);
 
   return res.status(200).json({ message: imageUrl });

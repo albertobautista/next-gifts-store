@@ -151,7 +151,6 @@ const AddressPage = () => {
                 select
                 variant="filled"
                 label="País"
-                // defaultValue={""}
                 {...register("country", {
                   required: "Este campo es requerido",
                 })}
@@ -188,30 +187,5 @@ const AddressPage = () => {
     </StoreLayout>
   );
 };
-
-// export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-//   const { token = "" } = req.cookies;
-//   let isValidToken = false;
-
-//   try {
-//     await jwt.isValidToken(token);
-//     isValidToken = true;
-//   } catch (error) {
-//     isValidToken = false;
-//   }
-
-//   if (!isValidToken) {
-//     return {
-//       redirect: {
-//         destination: "/auth/login?p=/checkout/address",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-//   return {
-//     props: {},
-//   };
-// };
 
 export default AddressPage;
