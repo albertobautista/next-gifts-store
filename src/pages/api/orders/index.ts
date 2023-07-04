@@ -54,8 +54,10 @@ async function createRouteLoader(
       throw new Error("Total is not correct");
     }
 
-    const userId = session.user?._id;
+    const userId = session.user?.id;
+    console.log("userId", session);
     const newOrder = new Order({ ...req.body, user: userId, isPaid: false });
+    console.log("newOrder", { userId, newOrder });
     await newOrder.save();
     return res.status(201).json(newOrder);
   } catch (error: any) {
