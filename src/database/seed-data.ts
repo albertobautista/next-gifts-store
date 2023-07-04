@@ -335,16 +335,16 @@ export const initialData: SeedData = {
   ],
   users: [
     {
-      name: "Alberto",
-      email: "alberto@gmail.com",
+      name: "Admin",
+      email: "admin@gmail.com",
       password: bcrypt.hashSync("123456"),
       role: "admin",
       picture:
         "https://res.cloudinary.com/deykexyle/image/upload/v1688346692/emptyProfilePicture_rsj2gy.png",
     },
     {
-      name: "Javier",
-      email: "javier@gmail.com",
+      name: "Client",
+      email: "client@gmail.com",
       password: bcrypt.hashSync("123456"),
       role: "client",
       picture:
